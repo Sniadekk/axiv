@@ -14,3 +14,7 @@ serde_json = "1.0"
 csv = "1.1"
 chrono = "0.4.15"
 anyhow = "1.0.32"
+
+[dev-dependencies]
+serde_test = "1.0.116"
+file_diff = "1.0.0"

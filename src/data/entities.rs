@@ -1,7 +1,7 @@
 use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 
-use super::{custom_date, pretty_float};
+use super::{custom_date, serialize_float};
 
 // I guess there are not many hotels, where you can find rooms for more than 256 people :D
 pub type PeopleAmount = u8;
@@ -14,7 +14,7 @@ pub fn generate_room_key(hotel_code: &str, room_code: &str, source: &str) -> Str
     format!("{}-{}-{}", hotel_code, room_code, source)
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct Room {
     pub hotel_code: String,
     pub source: String,
@@ -29,7 +29,7 @@ impl Room {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct Hotel {
     pub id: String,
     pub city_code: String,
@@ -72,6 +72,18 @@ pub struct Output {
     pub checkin: NaiveDate,
     #[serde(with = "custom_date")]
     pub checkout: NaiveDate,
-    #[serde(with = "pretty_float")]
+    #[serde(serialize_with = "serialize_float")]
     pub price: Price,
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn generate_key() {
+        assert_eq!(generate_room_key("HOTEL", "ROOM", "SRC"), "HOTEL-ROOM-SRC");
+        assert_eq!(generate_room_key("aaa", "bbb", "ccc"), "aaa-bbb-ccc");
+        assert_eq!(generate_room_key("000", "111", "222"), "000-111-222");
+    }
 }

@@ -31,8 +31,10 @@ dependencies = [
  "chrono",
  "clap",
  "csv",
+ "file_diff",
  "serde",
  "serde_json",
+ "serde_test",
 ]
 
 [[package]]
@@ -123,6 +125,12 @@ checksum = "2b2466559f260f48ad25fe6317b3c8dac77b5bdb5763ac7d9d6103530663bc90"
 dependencies = [
  "memchr",
 ]
+
+[[package]]
+name = "file_diff"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "31a7a908b8f32538a2143e59a6e4e2508988832d5d4d6f7c156b3cbc762643a5"
 
 [[package]]
 name = "hashbrown"
@@ -294,6 +302,15 @@ checksum = "164eacbdb13512ec2745fb09d51fd5b22b0d65ed294a1dcf7285a360c80a675c"
 dependencies = [
  "itoa",
  "ryu",
+ "serde",
+]
+
+[[package]]
+name = "serde_test"
+version = "1.0.116"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "923edec3f1ab4a2f489f384e117dc4f826fd977a9d189b28717cba8474dd5c6b"
+dependencies = [
  "serde",
 ]
 

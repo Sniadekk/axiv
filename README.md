@@ -18,3 +18,5 @@ After it's built, we are able to use it with our own arguments `./target/debug/a
                        doesn't exist [default: output.csv]
     -r <rooms>         Path to the file where data about rooms is stored. DataSource will look for data to import there
                        [default: room_names.csv]
+
+I didn't try it out with large input, so this program would need some tweaking in a real life scenario.

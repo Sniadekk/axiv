@@ -5,21 +5,21 @@ use chrono::Duration;
 use csv::DeserializeRecordsIter;
 
 use crate::data::entities::{generate_room_key, Price};
-use crate::data::{DataSource, Hotel, Input, Output, Room};
+use crate::data::{HotelDataSource, Input, Output, RoomDataSource};
 
 /// Struct used to enrich input data with the additional data from the rooms and hotels data source
 /// It works as an iterator and lazily buffers the data from .csv and into .csv files, so it is able
 /// to work with larger amounts of data.
 pub struct DataIntegrator<'a> {
     input: DeserializeRecordsIter<'a, File, Input>,
-    rooms: DataSource<Room, String>,
-    hotels: DataSource<Hotel, String>,
+    rooms: RoomDataSource,
+    hotels: HotelDataSource,
 }
 
 impl<'a> DataIntegrator<'a> {
     pub fn new(
-        rooms: DataSource<Room, String>,
-        hotels: DataSource<Hotel, String>,
+        rooms: RoomDataSource,
+        hotels: HotelDataSource,
         input: DeserializeRecordsIter<'a, File, Input>,
     ) -> Self {
         Self {
